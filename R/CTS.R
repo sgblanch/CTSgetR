@@ -49,7 +49,7 @@ CTS.translate<-function(server,from,to,id,progress=TRUE,limit.values=TRUE){
 		content<-lapply(1:length(id), function(i)
 			{
 				if(progress) setTxtProgressBar(pb, i)
-		    out<-content(GET(URLencode(url[i]))) 
+		    out<-content(RETRY("GET", URLencode(url[i]))) 
 		    #condition on results
 		    if(length(out[[1]]$result)==0) {
 		      out[[1]]$result<-""
@@ -86,7 +86,7 @@ CTS.translate<-function(server,from,to,id,progress=TRUE,limit.values=TRUE){
 #' @import httr
 #' @details get translation options from CTS
 CTS.options<-function(url="http://cts.fiehnlab.ucdavis.edu/service/conversion/toValues"){
-		content(GET(url))
+		content(RETRY("GET", url))
 	}
 
 #' @title multi.CTSgetR
